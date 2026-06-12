@@ -1,0 +1,11 @@
+# Frontend Architecture
+streamlit>=1.30.0
+
+# Core Data Manipulation
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Mathematical Modeling & Serialization
+# PINNED to 1.6.1 to prevent SVM unpickling errors from Colab
+scikit-learn==1.6.1
+joblib>=1.3.0
