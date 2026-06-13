@@ -12,7 +12,7 @@ st.set_page_config(page_title="BPSO-SVM Weather Engine", page_icon="🌤️", la
 
 st.markdown("""
     <style>
-    /* Global Background - Soft Gray matching your reference */
+    /* Global Background - Soft Gray */
     .stApp { background-color: #F4F6F9; }
     
     /* Clean Typography */
@@ -55,6 +55,29 @@ st.markdown("""
         width: 100%; background-color: white; border-radius: 8px;
         border: 1px solid #E6E6E9; padding: 20px;
     }
+
+    /* Primary Header Banner */
+    .main-header {
+        background: linear-gradient(135deg, #FF4B4B 0%, #B91C1C 100%);
+        padding: 35px 20px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 8px 20px -4px rgba(255, 75, 75, 0.4);
+        margin-bottom: 30px;
+    }
+    .main-header h1 {
+        color: #FFFFFF !important;
+        margin: 0;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+    }
+    .main-header p {
+        color: #FFE4E6 !important;
+        font-size: 18px;
+        margin-top: 8px;
+        margin-bottom: 0;
+        font-weight: 500;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -69,6 +92,7 @@ def load_background_geometry():
     
     target_col = 'RainTomorrow'
     numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
+    # Robust isolation for Pandas 3.x
     categorical_cols = [col for col in df.columns if col not in numeric_cols and col != target_col]
     
     for col in numeric_cols: df[col] = df[col].fillna(df[col].median())
@@ -123,10 +147,14 @@ with st.sidebar.expander("💧 Moisture & Pressure", expanded=False):
 # =====================================================================
 # MAIN DASHBOARD: THE CLEAN STAGE
 # =====================================================================
-st.markdown("<h1>🌦️ Atmospheric Early Warning System</h1>", unsafe_allow_html=True)
-st.markdown("<p style='font-size: 16px; margin-bottom:30px;'>Powered by Hybrid Binary Particle Swarm Optimization & Support Vector Machine</p>", unsafe_allow_html=True)
+st.markdown("""
+    <div class="main-header">
+        <h1>🌦️ Atmospheric Early Warning System</h1>
+        <p>Powered by Hybrid Binary Particle Swarm Optimization & Support Vector Machine</p>
+    </div>
+""", unsafe_allow_html=True)
 
-# Metrics display - Restored visibility
+# Metrics display
 m1, m2, m3, m4 = st.columns(4)
 with m1: st.metric(label="System Accuracy", value="79.68%")
 with m2: st.metric(label="Swarm Fitness", value="0.5147 MCC")
@@ -176,7 +204,7 @@ with center_col:
 st.markdown("<br><hr style='border:1px solid #E6E6E9;'><br>", unsafe_allow_html=True)
 
 # =====================================================================
-# BOTTOM SECTION: ENGINE ANALYTICS (FILLING THE SPACE)
+# BOTTOM SECTION: ENGINE ANALYTICS
 # =====================================================================
 st.markdown("<h3>📊 Model Evaluation Architecture</h3>", unsafe_allow_html=True)
 st.markdown("<p>Historical performance metrics derived from the 42,658-row holdout testing matrix.</p>", unsafe_allow_html=True)
