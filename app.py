@@ -69,7 +69,7 @@ def load_background_geometry():
     
     target_col = 'RainTomorrow'
     numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
-    categorical_cols = [col for col in df.columns if df[col].dtype == 'object' and col != target_col]
+    categorical_cols = [col for col in df.columns if col not in numeric_cols and col != target_col]
     
     for col in numeric_cols: df[col] = df[col].fillna(df[col].median())
     
