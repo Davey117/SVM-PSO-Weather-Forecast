@@ -204,6 +204,52 @@ with center_col:
 st.markdown("<br><hr style='border:1px solid #E6E6E9;'><br>", unsafe_allow_html=True)
 
 # =====================================================================
+# SVM DECISION BOUNDARY LOGIC (TABBED ARCHITECTURE)
+# =====================================================================
+st.markdown("<h3>🧠 Support Vector Hyperplane Logic</h3>", unsafe_allow_html=True)
+st.info("The Support Vector Machine (SVM) evaluates the non-linear boundaries of your 14 BPSO-optimized predictors. Below are the specific atmospheric combinations that shift the geometric prediction.")
+
+# Implement clean tabbed layout to avoid clustering
+tab_rain, tab_clear = st.tabs(["🚨 Convective Instability (Rain Drivers)", "☀️ Anti-Cyclonic Stability (Clear Drivers)"])
+
+with tab_rain:
+    st.markdown("""
+    <div style='color: #334155; padding: 15px 5px;'>
+    The SVM vectors map heavily toward <b>Rain</b> when the following mathematical thresholds are breached:
+    <ul style='margin-top: 10px;'>
+        <li><b>Moisture Saturation:</b> <code>Humidity3pm</code> and <code>Humidity9am</code> climb sharply (typically > <b>75%</b>).</li>
+        <li><b>Barometric Depression:</b> <code>Pressure3pm</code> and <code>Pressure9am</code> drop significantly (< <b>1005 hPa</b>), indicating an incoming low-pressure trough.</li>
+        <li><b>Active Turbulence:</b> <code>WindGustSpeed</code> is elevated, showing active aerodynamic shear and storm front movement.</li>
+        <li><b>Thermal Compression:</b> The margin between <code>MinTemp</code> and <code>MaxTemp</code> narrows.</li>
+        <li><b>Climatic Persistence:</b> <code>RainToday</code> is <b>Yes</b>, proving an active moisture cell is already anchored.</li>
+    </ul>
+    </div>
+    """, unsafe_allow_html=True)
+    
+with tab_clear:
+    st.markdown("""
+    <div style='color: #334155; padding: 15px 5px;'>
+    The maximum-margin classifier secures a <b>No Rain</b> output when it detects atmospheric suppression:
+    <ul style='margin-top: 10px;'>
+        <li><b>Dry Air Masses:</b> Afternoon humidity levels remain moderate to low (< <b>50%</b>).</li>
+        <li><b>High Atmospheric Pressure:</b> Barometric readings remain high and stable (> <b>1015 hPa</b>).</li>
+        <li><b>Stable Airflow:</b> Wind speeds and gusts remain at normal baseline levels without erratic spikes.</li>
+        <li><b>Broad Thermal Range:</b> Normal expected gaps between morning and afternoon temperatures.</li>
+        <li><b>Climatic Persistence:</b> <code>RainToday</code> is <b>No</b>.</li>
+    </ul>
+    </div>
+    """, unsafe_allow_html=True)
+    
+st.markdown("<br>", unsafe_allow_html=True)
+st.markdown("""
+    <div style='color: #334155; background-color: #F8FAFC; padding: 15px; border-left: 4px solid #FF4B4B; border-radius: 4px;'>
+    💡 <b>Panel Demonstration:</b> Open the sidebar, set <code>RainToday</code> to <b>Yes</b>, push <code>Humidity3pm</code> to <b>90%</b>, drop <code>Pressure3pm</code> to <b>990 hPa</b>, and raise <code>WindGustSpeed</code> to <b>60 km/h</b>. Execute the engine and observe how the hyperplane conclusively maps to Rainfall.
+    </div>
+""", unsafe_allow_html=True)
+
+st.markdown("<br><hr style='border:1px solid #E6E6E9;'><br>", unsafe_allow_html=True)
+
+# =====================================================================
 # BOTTOM SECTION: ENGINE ANALYTICS
 # =====================================================================
 st.markdown("<h3>📊 Model Evaluation Architecture</h3>", unsafe_allow_html=True)
